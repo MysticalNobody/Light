@@ -8,8 +8,7 @@ public:
 	Texture bgTextrure[4];
 	Sprite bgSprite[4];
 	int getWidth();
-	Background(int, int);
-	void setSprite();
+	void setSprite(int, int);
 	void draw(RenderWindow&);
 };
 
