@@ -7,6 +7,8 @@ int main()
 	RenderWindow window(VideoMode(1280, 720), "Light");
 	View view(FloatRect(0, 0, 1280, 720));
 	Hero hero;
+	Shader bloom;
+	hero.shader.loadFromFile("Shaders/bloom.glsl", Shader::Fragment);
 	Hero shadow[10];
 	hero.xPos = 0, hero.yPos = 510;
 	std::string state;
@@ -26,11 +28,14 @@ int main()
 		int layerPos = 0;
 		Background bg[12];
 		for (int i = 0; i < 12; i++) {
-			if (i == 2) {
+			if (i == 1 || i == 4) {
 				bg[i].setSprite(layerPos, 2);
 			}
 			else {
 				bg[i].setSprite(layerPos, 1);
+			}
+			if (x >= 550) {
+				bg[i].updatePos(layerPos - (x - 550)*0.7, layerPos - (x - 550)*0.8, layerPos - (x - 550)*0.9, layerPos - (x - 550));
 			}
 			layerPos += bg[i].getWidth();
 		}
@@ -54,9 +59,11 @@ int main()
 		clock.restart().asMilliseconds();
 		window.clear();
 		window.setView(view);
-		for (int i = 0; i < 12; i++)
-		{
-			bg[i].draw(window);
+		for (int layer = 0; layer < 4; layer++) {
+			for (int i = 11; i >= 0; i--)
+			{
+				bg[i].draw(window, layer);
+			}
 		}
 		if (state == "idle") {
 			CurrentFrame += 0.03;
@@ -77,7 +84,7 @@ int main()
 			shadow[i].yPos = hero.yPos;
 			shadow[i].xPos = hero.xPos;
 			if (state == "run left") {
-				shadow[i].drawShadow(window, state, (int)CurrentFrame, 100 - 10*i, i * 4);
+				shadow[i].drawShadow(window, state, (int)CurrentFrame, 100 - 10 * i, i * 4);
 			}
 			else if (state == "run right") {
 				shadow[i].drawShadow(window, state, (int)CurrentFrame, 100 - 10 * i, -i * 4);

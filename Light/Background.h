@@ -9,6 +9,7 @@ public:
 	Sprite bgSprite[4];
 	int getWidth();
 	void setSprite(int, int);
-	void draw(RenderWindow&);
+	void draw(RenderWindow&, int);
+	void updatePos(int, int, int, int);
 };
 

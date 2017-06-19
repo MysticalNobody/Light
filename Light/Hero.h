@@ -4,6 +4,7 @@ using namespace sf;
 class Hero
 {
 public:
+	Shader shader;
 	int xPos, yPos;
 	Texture texture;
 	Sprite sprite;

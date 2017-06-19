@@ -34,20 +34,27 @@ void Background::setSprite(int x, int lay)
 				bgSprite[i].setTexture(bgTextrure[i]);
 				bgSprite[i].setScale(4.5, 4.5);
 			}
-			else if (i < 3) {
+			else if (i > 1) {
 				bgTextrure[i].loadFromFile(path);
 				bgSprite[i].setTexture(bgTextrure[i]);
-				bgSprite[i].setScale(5, 5);
+				bgSprite[i].setScale(3.55, 4.5);
 			}
 			bgSprite[i].setPosition(xPos, 0);
 		}
 	}
 }
 
-void Background::draw(RenderWindow &window)
+void Background::draw(RenderWindow &window, int layer)
 {
-	for (int i = 0; i < 4; i++) {
-		window.draw(bgSprite[i]);
-	}
+	window.draw(bgSprite[layer]);
 }
+
+void Background::updatePos(int xPos1, int xPos2, int xPos3, int xPos4)
+{
+	bgSprite[0].setPosition(xPos1, bgSprite[0].getPosition().y);
+	bgSprite[1].setPosition(xPos2, bgSprite[1].getPosition().y);
+	bgSprite[2].setPosition(xPos3, bgSprite[2].getPosition().y);
+	bgSprite[3].setPosition(xPos4, bgSprite[3].getPosition().y);
+}
+
 
