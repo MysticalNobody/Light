@@ -37,7 +37,7 @@ void Background::setSprite(int x, int lay)
 			else if (i > 1) {
 				bgTextrure[i].loadFromFile(path);
 				bgSprite[i].setTexture(bgTextrure[i]);
-				bgSprite[i].setScale(3.55, 4.5);
+				bgSprite[i].setScale(3.5, 4.5);
 			}
 			bgSprite[i].setPosition(xPos, 0);
 		}
